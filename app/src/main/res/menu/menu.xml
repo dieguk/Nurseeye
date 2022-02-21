@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/cuenta">
+        <menu>
+            <item
+                android:id="@+id/test"
+                android:icon="@android:drawable/ic_menu_add"
+                android:title="@string/mapa"
+                android:visible="true" />
+            <item
+                android:id="@+id/another"
+                android:icon="@android:drawable/ic_menu_search"
+                android:title="@string/buscar"
+                android:visible="true" />
+
+
+        </menu>
+    </item>
+</menu>

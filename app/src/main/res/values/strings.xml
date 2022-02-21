@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">FirebaseAuth</string>
+    <string name="title_activity_load">LoadActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="buscar">buscar</string>
+    <string name="mapa">agregarpaciente</string>
+    <string name="cuenta">cuenta</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>

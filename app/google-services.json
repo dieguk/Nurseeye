@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "226097499630",
+    "project_id": "silken-buttress-281817",
+    "storage_bucket": "silken-buttress-281817.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226097499630:android:0fa88b61cdd6033ab512ff",
+        "android_client_info": {
+          "package_name": "com.example.firebaseauth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "226097499630-4m8nanqv7qlmi19f7q68j4vuaqpbnci9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firebaseauth",
+            "certificate_hash": "2eb51c41d7ae6337fc81c73724d350dcc3b19278"
+          }
+        },
+        {
+          "client_id": "226097499630-k8megdg981prvrjn1qh20crivmcebd2d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG4x8CAvOdsnYVkvi5K23ec-zXBTriuMY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "226097499630-k8megdg981prvrjn1qh20crivmcebd2d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
