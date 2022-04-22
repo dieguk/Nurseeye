@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,10 +43,11 @@ public class LoadResultados<area1> extends AppCompatActivity {
     GraphView grafico3;
     ImageView herida1 ;
     ImageView herida2 ;
-    ImageView herida3 ;
+    ImageView herida3;
+
     EditText resultadoescala ;
-    ProgressBar progresbar2;
-    TextView fechas, fechas2;
+
+    TextView fechas, fechas2, fechafoto1, fechafoto2, fechafoto3 ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +61,10 @@ public class LoadResultados<area1> extends AppCompatActivity {
          herida2 = findViewById(R.id.Herida2);
          herida3 = findViewById(R.id.Herida3);
         resultadoescala = findViewById(R.id.TxtClasificacion);
-         progresbar2 = findViewById(R.id.progresbar2);
+        fechafoto1 = findViewById(R.id.fechafoto1);
+        fechafoto2 = findViewById(R.id.fechafoto2);
+        fechafoto3 = findViewById(R.id.fechafoto3);
+
          fechas = findViewById(R.id.uno);
          fechas2 = findViewById(R.id.textResultados2);
 
@@ -90,7 +93,7 @@ public class LoadResultados<area1> extends AppCompatActivity {
 
             @Override
             public void exito(Integer area, Integer puntos) {
-                //mStoragereference = FirebaseStorage.getInstance().getReference("images/123-4PieDerecho06-02-2022.jpg");
+
 
                 mStoragereference = FirebaseStorage.getInstance().getReference("images/").child(rutdelpaciente+heridaprincipal+Nruta5);
 
@@ -112,6 +115,8 @@ public class LoadResultados<area1> extends AppCompatActivity {
                 }
                 Area1 = area;
                 p1 = puntos;
+                traductorgravedad(p1);
+                pp1 = pc;
 
                 Log.i("area", String.valueOf(area1));
                 grafico1.setVisibility(View.INVISIBLE);
@@ -137,6 +142,8 @@ public class LoadResultados<area1> extends AppCompatActivity {
 
                         Area2 = area;
                         p2 = puntos;
+                        traductorgravedad(p2);
+                        pp2 = pc;
                         Toast.makeText(LoadResultados.this,"Datos leidos correctamente",Toast.LENGTH_LONG).show();
                         leerarea.loadrutas(Nruta3, rutdelpaciente, heridaprincipal, new ListenerFB() {
                             @Override
@@ -160,17 +167,22 @@ public class LoadResultados<area1> extends AppCompatActivity {
 
                                 Area3 = area;
                                 p3= puntos;
+                                traductorgravedad(p3);
+                                pp3 = pc;
                                 leerarea.loadrutas(Nruta4, rutdelpaciente, heridaprincipal, new ListenerFB() {
                                     @Override
                                     public void exito(Integer area,Integer puntos) {
                                         Area4 = area;
                                         p4 = puntos;
-                                        leerarea.loadrutas(Nruta4, rutdelpaciente, heridaprincipal, new ListenerFB() {
+                                        traductorgravedad(p4);
+                                        pp4 = pc;
+                                        leerarea.loadrutas(Nruta5, rutdelpaciente, heridaprincipal, new ListenerFB() {
                                             @Override
                                             public void exito(Integer area,Integer puntos) {
                                                 Area5 = area;
                                                 p5 = puntos;
-                                                progresbar2.setVisibility(View.INVISIBLE);
+                                                traductorgravedad(p5);
+                                                pp5 = pc;
 
                                                 //seria de datos para graficar
                                                 LineGraphSeries<DataPoint> Sarea = new LineGraphSeries<DataPoint>(new DataPoint[]{
@@ -183,15 +195,24 @@ public class LoadResultados<area1> extends AppCompatActivity {
                                                         new DataPoint(1, p1), new DataPoint(2, p2), new DataPoint(3, p3), new DataPoint(4, p4), new DataPoint(5, p5)
                                                 });
                                                 resultados(puntos);
+                                                LineGraphSeries<DataPoint> Sclasifc = new LineGraphSeries<DataPoint>(new DataPoint[]{
+
+                                                        new DataPoint(1, pp1), new DataPoint(2, pp2), new DataPoint(3, pp3), new DataPoint(4, pp4), new DataPoint(5, pp5)
+                                                });
+                                                resultados(puntos);
 
                                                 resultadoescala.setText(resultado);
                                                 grafico1.addSeries(Sarea);
                                                 grafico2.addSeries(Spuntos);
+                                                grafico3.addSeries(Sclasifc);
                                                 grafico1.setVisibility(View.VISIBLE);
-                                                String fechas1 = " 1:" + Nruta1 + "    2:" + Nruta3 + "    3:" + Nruta3 + "    4:" + Nruta4;
+                                                String fechas1 = " 1:" + Nruta1 + "    2:" + Nruta2 + "    3:" + Nruta3 + "    4:" + Nruta4;
                                                 String fechas22 = "  5:" + Nruta5;
                                                 fechas.setText(fechas1);
                                                 fechas2.setText(fechas22);
+                                                fechafoto1.setText(Nruta1);
+                                                fechafoto2.setText(Nruta2);
+                                                fechafoto3.setText(Nruta3);
                                                 Log.i("A5", String.valueOf(Area5));
                                             }
 
@@ -248,6 +269,18 @@ public class LoadResultados<area1> extends AppCompatActivity {
             resultado = "herida grave";
         }
 
+    }
+    Integer pc,pp1,pp2,pp3,pp4,pp5;
+    public void traductorgravedad (Integer p){
+        if (p < 10){
+            pc = 1;
+        }
+        if (p > 10 && p <=20){
+            pc = 2;
+        }
+        if (p >20){
+            pc= 3;
+        }
     }
 }
            /*  LineGraphSeries<DataPoint> Sarea = new LineGraphSeries<DataPoint>(new DataPoint[]{

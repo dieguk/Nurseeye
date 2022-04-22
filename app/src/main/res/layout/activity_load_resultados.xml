@@ -36,21 +36,12 @@
                     android:layout_marginTop="24dp"
                     android:text="Resultados obtenidos"
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-
-                <ProgressBar
-                    android:id="@+id/progresbar2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView10" />
 
                 <EditText
                     android:id="@+id/TxtClasificacion"
@@ -60,10 +51,18 @@
                     android:ems="10"
                     android:text="Resultados de escala"
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.497"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textResultados" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Resultados Area"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <com.jjoe64.graphview.GraphView
                     android:id="@+id/graficopuntostotales"
@@ -84,13 +83,22 @@
                     android:id="@+id/textResultados2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="Resultados obtenidos"
+                    android:layout_marginTop="16dp"
+                    android:text="Resultados puntajes totales"
                     android:textSize="20sp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Resultados puntajes totales"
+                    android:layout_marginTop="16dp"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <com.jjoe64.graphview.GraphView
                     android:id="@+id/graficoclasificacion"
@@ -99,6 +107,13 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="4dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Resultados clasificacion"
+                    android:layout_marginTop="16dp"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <com.jjoe64.graphview.GraphView
                     android:id="@+id/graficoarea"
@@ -107,26 +122,49 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="4dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fechafoto1"
+                    android:layout_marginTop="16dp"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/Herida1"
-                    android:layout_width="543dp"
+                    android:layout_width="match_parent"
                     android:layout_height="420dp"
                     tools:layout_editor_absoluteX="0dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
                     tools:layout_editor_absoluteY="1087dp"
                     tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fechafoto2"
+                    android:layout_marginTop="16dp"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
                 <ImageView
                     android:id="@+id/Herida2"
-                    android:layout_width="543dp"
+                    android:layout_width="match_parent"
                     android:layout_height="420dp"
                     tools:layout_editor_absoluteX="0dp"
                     tools:layout_editor_absoluteY="1087dp"
                     tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fechafoto3"
+                    android:layout_marginTop="16dp"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
                 <ImageView
                     android:id="@+id/Herida3"
-                    android:layout_width="543dp"
+                    android:layout_width="match_parent"
                     android:layout_height="420dp"
                     tools:layout_editor_absoluteX="0dp"
                     tools:layout_editor_absoluteY="1087dp"

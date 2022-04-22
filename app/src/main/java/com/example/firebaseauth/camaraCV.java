@@ -1,24 +1,26 @@
 package com.example.firebaseauth;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Surface;
 import android.view.SurfaceView;
-import android.widget.Switch;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
+import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
+import org.opencv.imgproc.Imgproc;
 
 public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private static final String TAG="MainActivity";
@@ -94,6 +96,7 @@ public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraV
         mRGBA= new Mat(height,width, CvType.CV_8UC4);
         mRGBAT= new Mat(height,width, CvType.CV_8UC1);
 
+
     }
 
     @Override
@@ -104,8 +107,39 @@ public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraV
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
+       // mRGBA = inputFrame.rgba();
+       // mRGBA = inputFrame.gray();
         mRGBA = inputFrame.rgba();
-        mRGBA = inputFrame.gray();
-        return mRGBA;
+        Mat mRgbaT = mRGBA.t();
+        Core.flip(mRGBA.t(), mRgbaT, 1);
+        Imgproc.resize(mRgbaT, mRgbaT, mRGBA.size());
+
+
+        Mat input = inputFrame.gray();
+        Mat circles = new Mat();
+        Imgproc.blur(input, input, new Size(7, 7), new Point(2, 2));
+        Imgproc.HoughCircles(input, circles, Imgproc.CV_HOUGH_GRADIENT, 2, 100, 100, 90, 0, 1000);
+
+        Log.i(TAG, String.valueOf("size: " + circles.cols()) + ", " + String.valueOf(circles.rows()));
+
+        if (circles.cols() > 0) {
+            for (int x=0; x < Math.min(circles.cols(), 5); x++ ) {
+                double circleVec[] = circles.get(0, x);
+
+                if (circleVec == null) {
+                    break;
+                }
+
+                Point center = new Point((int) circleVec[0], (int) circleVec[1]);
+                int radius = (int) circleVec[2];
+
+                Imgproc.circle(input, center, 3, new Scalar(255, 255, 255), 5);
+                Imgproc.circle(input, center, radius, new Scalar(255, 255, 255), 2);
+            }
+        }
+
+        circles.release();
+        input.release();
+        return inputFrame.rgba();
     }
 }

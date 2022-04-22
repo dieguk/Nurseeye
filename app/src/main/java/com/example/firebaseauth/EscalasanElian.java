@@ -23,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class EscalasanElian extends AppCompatActivity {
     TextView textView2;
@@ -638,7 +639,7 @@ public class EscalasanElian extends AppCompatActivity {
         granulacion.setBackgroundResource(R.drawable.templatebotonamarillo);
     }
     public void camara(View view) {
-        Intent intent = new Intent(EscalasanElian.this,Camerax.class);
+        Intent intent = new Intent(EscalasanElian.this,camaraCV.class);
         intent.putExtra("rutdelpaciente",rutdelpaciente);
         intent.putExtra("nombreherida",nombreherida);
 
@@ -678,6 +679,7 @@ public class EscalasanElian extends AppCompatActivity {
                     }
                 });
         TRuta6 = currentDateandTime;
+        AtomicInteger a = new AtomicInteger();
 
         DocumentReference load2 = db.collection("datosPacienteins").document(rutdelpaciente).collection("resultados").document("Rutastemporales");
         load2.get().addOnSuccessListener(documentSnapshot -> {
@@ -702,6 +704,7 @@ public class EscalasanElian extends AppCompatActivity {
                         TRuta5 = documentSnapshot.getString(Ruta5);
                         if (TRuta5 == null) {
                             TRuta5 = TRuta6;
+
                         }
                         TRuta6 = documentSnapshot.getString(Ruta6);
                         if (TRuta6 == null) {
@@ -722,14 +725,40 @@ public class EscalasanElian extends AppCompatActivity {
 
                 String Nruta1,Nruta2,Nruta3,Nruta4,Nruta5,Nruta6, Rutastemporales= "Rutastemporales";
                 //escribir las rutas
+                String ultimafecha = TRuta5;
+                String fechactual = currentDateandTime;
+                if(TRuta5.equals(currentDateandTime)){
+                Nruta1 = TRuta1;
+                Nruta2 = TRuta2;
+                Nruta3 = TRuta3;
+                Nruta4 = TRuta4;
+                Nruta5 = TRuta5;
+                Nruta6 = TRuta6;
 
 
-                Nruta1 = TRuta2;
-                Nruta2 = TRuta3;
-                Nruta3 = TRuta4;
-                Nruta4 = TRuta5;
-                Nruta5 = currentDateandTime;
-                Nruta6 = currentDateandTime;
+                cancelartoast();
+                // Toast.makeText(EscalasanElian.this,"Paciente registrado correctamente",Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.INVISIBLE);
+                    Intent intent = new Intent(EscalasanElian.this,LoadResultados.class);
+                    intent.putExtra("rutdelpaciente",rutdelpaciente);
+                    intent.putExtra("nombreherida",nombreherida);intent.putExtra("ruta1",Nruta1);
+                    intent.putExtra("ruta2",Nruta2);
+                    intent.putExtra("ruta3",Nruta3);
+                    intent.putExtra("ruta4",Nruta4);
+                    intent.putExtra("ruta5",Nruta5);
+                    startActivity(intent);
+
+
+
+                }
+                else{
+                    Nruta1 = TRuta2;
+                    Nruta2 = TRuta3;
+                    Nruta3 = TRuta4;
+                    Nruta4 = TRuta5;
+                    Nruta5 = currentDateandTime;
+                    Nruta6 = currentDateandTime;
+
                 FbRutas rutasTemporales = new FbRutas(Nruta1,Nruta2,Nruta3,Nruta4,Nruta5,Nruta6);
                 DatabaseReference myRef2 = database.getReference(Rutastemporales);
                 db.collection("datosPacienteins").document(rutdelpaciente).collection("resultados").document("Rutastemporales").set(rutasTemporales)
@@ -758,7 +787,9 @@ public class EscalasanElian extends AppCompatActivity {
 
                             }
                         });
+                }
             });
+
         }
 
         //guardar rutastemporales
