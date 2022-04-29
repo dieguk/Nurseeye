@@ -2,10 +2,12 @@ package com.example.firebaseauth;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceView;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -20,13 +22,19 @@ import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
+import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private static final String TAG="MainActivity";
 
     Mat mRGBA;
     Mat mRGBAT;
+    int take_image = 0;
     CameraBridgeViewBase cameraBridgeViewBase;
     BaseLoaderCallback baseLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -46,6 +54,8 @@ public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityCompat.requestPermissions(camaraCV.this,new String[]{Manifest.permission.CAMERA}, 1);
+        ActivityCompat.requestPermissions(camaraCV.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        ActivityCompat.requestPermissions(camaraCV.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         setContentView(R.layout.activity_camara_cv);
         cameraBridgeViewBase = (CameraBridgeViewBase) findViewById(R.id.camaracv);
         cameraBridgeViewBase.setVisibility(SurfaceView.VISIBLE);
@@ -123,7 +133,7 @@ public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraV
         Log.i(TAG, String.valueOf("size: " + circles.cols()) + ", " + String.valueOf(circles.rows()));
 
         if (circles.cols() > 0) {
-            for (int x=0; x < Math.min(circles.cols(), 5); x++ ) {
+            for (int x=0; x < Math.min(circles.cols(), 1); x++ ) {
                 double circleVec[] = circles.get(0, x);
 
                 if (circleVec == null) {
@@ -132,14 +142,60 @@ public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraV
 
                 Point center = new Point((int) circleVec[0], (int) circleVec[1]);
                 int radius = (int) circleVec[2];
-
+                double area = (radius * radius)* 3.141519;
+                int area2 = (int)area;
+                if(area < 17000){
                 Imgproc.circle(input, center, 3, new Scalar(255, 255, 255), 5);
-                Imgproc.circle(input, center, radius, new Scalar(255, 255, 255), 2);
+                Imgproc.circle(input, center, radius, new Scalar(0, 255, 0), 2);
+                Imgproc.putText(input, "el area es "+ area2,center,4,0.5,new Scalar(0,0,0),2);
+
+                int Vpix = 57 / area2;
+                }
+
             }
         }
 
         circles.release();
         input.release();
+        Mat RGBA = inputFrame.rgba();
+
+        take_image = take_picture_function_rgb(take_image,RGBA);
         return inputFrame.rgba();
+
+
     }
+    public void fotoopencv(View view) {
+        if (take_image ==0){
+            take_image = 1;
+        }
+        else{
+            take_image =0;
+        }
+
+
+    }
+    private int take_picture_function_rgb(int take_image, Mat RGBA) {
+        if (take_image ==1){
+            Mat save_mat = new Mat();
+            Imgproc.cvtColor(RGBA,save_mat,Imgproc.COLOR_RGBA2BGRA);
+            File folder = new File("/storage/self/primary/Android/data/com.example.firebaseauth/files/Pictures");
+            boolean succes = true;
+            if(!folder.exists()){
+                succes = folder.mkdirs();
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            String currentDateandTime = sdf.format(new Date(1));
+            String Filename = "/storage/self/primary/Android/data/com.example.firebaseauth/files/Pictures/fototemporal.jpg";
+            Imgcodecs.imwrite(Filename,save_mat);
+            take_image = 0;
+            Intent intent = new Intent(this,Drawing.class);
+            startActivity(intent);
+        }
+
+
+
+        return take_image;
+    }
+
+
 }

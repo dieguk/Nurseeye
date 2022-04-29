@@ -115,6 +115,7 @@ public class Camerax extends AppCompatActivity {
     }
     String rutdelpaciente, llave = "rutdelpaciente";
     String nombreherida, key = "nombreherida";
+
     public void sacarfoto(View view) {
 
         String directorio =Environment.getExternalStorageDirectory().getPath();

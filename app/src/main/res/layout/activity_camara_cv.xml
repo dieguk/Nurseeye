@@ -5,9 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".camaraCV">
+
     <org.opencv.android.JavaCameraView
+        android:id="@+id/camaracv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/camaracv"/>
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="@+id/camaracv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="fotoopencv"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
