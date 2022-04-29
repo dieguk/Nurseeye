@@ -1,4 +1,4 @@
 include ':app'
 rootProject.name = "FirebaseAuth"
 
-
+include ':opencvsdk4.5.1'
