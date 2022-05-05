@@ -16,7 +16,6 @@ import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
-import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -49,6 +48,7 @@ public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraV
             super.onManagerConnected(status);
         }
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +114,7 @@ public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraV
         mRGBA.release();
 
     }
+         double Vpix ;
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
@@ -121,7 +122,7 @@ public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraV
        // mRGBA = inputFrame.gray();
         mRGBA = inputFrame.rgba();
         Mat mRgbaT = mRGBA.t();
-        Core.flip(mRGBA.t(), mRgbaT, 1);
+        //Core.flip(mRGBA.t(), mRgbaT, 1);
         Imgproc.resize(mRgbaT, mRgbaT, mRGBA.size());
 
 
@@ -133,6 +134,7 @@ public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraV
         Log.i(TAG, String.valueOf("size: " + circles.cols()) + ", " + String.valueOf(circles.rows()));
 
         if (circles.cols() > 0) {
+            //modificacion de cantidad de circuos detectados en el ultimo valor
             for (int x=0; x < Math.min(circles.cols(), 1); x++ ) {
                 double circleVec[] = circles.get(0, x);
 
@@ -142,15 +144,25 @@ public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraV
 
                 Point center = new Point((int) circleVec[0], (int) circleVec[1]);
                 int radius = (int) circleVec[2];
-                double area = (radius * radius)* 3.141519;
-                int area2 = (int)area;
-                if(area < 17000){
+                double radio = circleVec[2];
+                double area = ((radio * radio)* 3.141519);
+                double area2 = area;
+                double alto = input.size().height;
+                double ancho = input.size().width;
                 Imgproc.circle(input, center, 3, new Scalar(255, 255, 255), 5);
                 Imgproc.circle(input, center, radius, new Scalar(0, 255, 0), 2);
                 Imgproc.putText(input, "el area es "+ area2,center,4,0.5,new Scalar(0,0,0),2);
 
-                int Vpix = 57 / area2;
-                }
+
+                System.out.print("este es el alto" + alto);
+                System.out.print("este es el ancho" + ancho);
+
+
+                Vpix = 57.0/ area2;
+                 //Vpix = 1.35/ radio;
+
+
+
 
             }
         }
@@ -176,9 +188,13 @@ public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraV
     }
     private int take_picture_function_rgb(int take_image, Mat RGBA) {
         if (take_image ==1){
+            Mat mRgbaT = RGBA.t();
             Mat save_mat = new Mat();
             Imgproc.cvtColor(RGBA,save_mat,Imgproc.COLOR_RGBA2BGRA);
+            Imgproc.resize(save_mat.t(), mRgbaT, save_mat.size());
+            //Core.flip(RGBA.t(), mRgbaT, 1);
             File folder = new File("/storage/self/primary/Android/data/com.example.firebaseauth/files/Pictures");
+
             boolean succes = true;
             if(!folder.exists()){
                 succes = folder.mkdirs();
@@ -189,6 +205,10 @@ public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraV
             Imgcodecs.imwrite(Filename,save_mat);
             take_image = 0;
             Intent intent = new Intent(this,Drawing.class);
+
+            String valorint = Double.toString(Vpix);
+
+            intent.putExtra("valor pixel",Vpix);
             startActivity(intent);
         }
 
