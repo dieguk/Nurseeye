@@ -30,11 +30,15 @@ import java.util.Date;
 
 public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private static final String TAG="MainActivity";
-
+    double Vpix ;
+    double Dpix;
     Mat mRGBA;
     Mat mRGBAT;
     int take_image = 0;
+    String rutdelpaciente, llave = "rutdelpaciente";
+    String nombreherida, key = "nombreherida";
     CameraBridgeViewBase cameraBridgeViewBase;
+
     BaseLoaderCallback baseLoaderCallback = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {
@@ -60,6 +64,9 @@ public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraV
         cameraBridgeViewBase = (CameraBridgeViewBase) findViewById(R.id.camaracv);
         cameraBridgeViewBase.setVisibility(SurfaceView.VISIBLE);
         cameraBridgeViewBase.setCvCameraViewListener(this);
+        Bundle bundle = getIntent().getExtras();
+        rutdelpaciente = bundle.getString(llave);
+        nombreherida = bundle.getString(key);
     }
 
     @Override
@@ -114,7 +121,7 @@ public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraV
         mRGBA.release();
 
     }
-         double Vpix ;
+
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
@@ -147,18 +154,17 @@ public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraV
                 double radio = circleVec[2];
                 double area = ((radio * radio)* 3.141519);
                 double area2 = area;
-                double alto = input.size().height;
-                double ancho = input.size().width;
+
                 Imgproc.circle(input, center, 3, new Scalar(255, 255, 255), 5);
                 Imgproc.circle(input, center, radius, new Scalar(0, 255, 0), 2);
                 Imgproc.putText(input, "el area es "+ area2,center,4,0.5,new Scalar(0,0,0),2);
 
 
-                System.out.print("este es el alto" + alto);
-                System.out.print("este es el ancho" + ancho);
+
 
 
                 Vpix = 57.0/ area2;
+                Dpix = 2 * radius;
                  //Vpix = 1.35/ radio;
 
 
@@ -209,6 +215,10 @@ public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraV
             String valorint = Double.toString(Vpix);
 
             intent.putExtra("valor pixel",Vpix);
+            intent.putExtra("valor diametro", Dpix);
+            intent.putExtra("rutdelpaciente", rutdelpaciente);
+            intent.putExtra("nombreherida", nombreherida);
+
             startActivity(intent);
         }
 

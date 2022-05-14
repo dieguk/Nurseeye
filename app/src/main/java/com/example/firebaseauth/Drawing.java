@@ -1,14 +1,15 @@
 package com.example.firebaseauth;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.hardware.Camera;
-import android.hardware.camera2.CameraCharacteristics;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -19,7 +20,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.opencv.android.Utils;
 import org.opencv.core.Mat;
@@ -37,7 +46,7 @@ public class Drawing extends AppCompatActivity {
     ImageView imagedrawing;
     RelativeLayout relativeLayout;
     int take_image = 0;
-
+    int validador = 0;
     int A,Rs,G,B;
     Paint paint;
     View view;
@@ -45,18 +54,25 @@ public class Drawing extends AppCompatActivity {
     Bitmap bitmap;
     Canvas canvas;
     Button button, boton2;
-    double Valorpixel;
+    double area;
+
+    double Valorpixel, valordiametro;
     int valorperimetro;
     int Count =0, count1 = 0, count2 = 0;
     Bitmap bitmap2 = BitmapFactory.decodeFile("/storage/self/primary/Android/data/com.example.firebaseauth/files/Pictures/fototemporal.jpg");
     private ScaleGestureDetector scaleGestureDetector;
     private float mScaleFactor = 1.0f;
+
+    String rutdelpaciente, llave = "rutdelpaciente";
+    String nombreherida, key = "nombreherida";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawing);
         imagedrawing = findViewById(R.id.imagedrawing);
-
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
        // imagedrawing.setImageBitmap(Bitmap.createScaledBitmap(bitmap,720,480,false));
        // imagedrawing.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
@@ -67,8 +83,12 @@ public class Drawing extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         Valorpixel = bundle.getDouble("valor pixel");
+        valordiametro = bundle.getDouble("valor diametro");
+        rutdelpaciente = bundle.getString(llave);
+        nombreherida =bundle.getString(key);
+
         Log.i(TAG, String.valueOf("size: " + Valorpixel + ", " ));
-        Toast.makeText(this, "valor de pixel" + Valorpixel, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "valor de pixel" + Valorpixel + "diametro" + valordiametro, Toast.LENGTH_SHORT).show();
 
         relativeLayout = (RelativeLayout) findViewById(R.id.relativelayout1);
 
@@ -95,7 +115,9 @@ public class Drawing extends AppCompatActivity {
 
         paint.setStrokeCap(Paint.Cap.ROUND);
 
-        paint.setStrokeWidth(2);
+
+        paint.setStrokeWidth(1);
+
 
 
 
@@ -128,76 +150,11 @@ public class Drawing extends AppCompatActivity {
                     }
 
                 }
-                 double perimetro = Valorpixel * contadorblancos;
-                /*
-                if(contadorblancos>1) {
-                    //Toast.makeText(Drawing.this, "pixeles blancos = " + perimetro, Toast.LENGTH_SHORT).show();
-
-                    CameraCharacteristics.Key<SizeF> cameraCharacteristics = CameraCharacteristics.SENSOR_INFO_PHYSICAL_SIZE;
-                    SizeF.parseSizeF(String.valueOf(cameraCharacteristics)).getHeight();
-                    SizeF.parseSizeF(String.valueOf(cameraCharacteristics)).getWidth();
-
-                    int cameraatras = CameraCharacteristics.LENS_FACING_BACK;
-
-
-                    Camera camera = null;
-                    Camera.Parameters p = camera.getParameters();
-                    double thetaV = Math.toRadians(p.getVerticalViewAngle());
-                    double thetaH = Math.toRadians(p.getHorizontalViewAngle());
-                    String size = p.get(String.valueOf(CameraCharacteristics.SENSOR_INFO_PHYSICAL_SIZE));
-                    double focalLength = p.getFocalLength();
-
-
-                    double sensorwidith = (Math.tan(thetaH/2)*2*focalLength);
-                    double sensorvertical = (Math.tan(thetaV/2)*2*focalLength);
-
-
-                    Toast.makeText(Drawing.this, "pixeles blancos = " + sensorwidith + sensorvertical, Toast.LENGTH_SHORT).show();
-
-                    CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-                    try {
-                        String[] cameraIds = manager.getCameraIdList();
-                        if (cameraIds.length == 1) {
-                            CameraCharacteristics character = manager.getCameraCharacteristics(cameraIds[0]);
-                            SizeF porte = character.get(CameraCharacteristics.SENSOR_INFO_PHYSICAL_SIZE);
-                        }
-                    }
-                    catch (CameraAccessException e)
-                    {
-                        Log.e("YourLogString", e.getMessage(), e);
-                    }
-
-                    /*Camera camera = null;
-                    Camera.Parameters p = camera.getParameters();
-                    double thetaV = Math.toRadians(p.getVerticalViewAngle());
-                    double thetaH = Math.toRadians(p.getHorizontalViewAngle());
-                    String size = p.get(String.valueOf(CameraCharacteristics.SENSOR_INFO_PHYSICAL_SIZE));
-                    double focalLength = p.getFocalLength();
-                    double horizontalViewAngle = p.getHorizontalViewAngle();
-                    double verticalViewAngle = p.getVerticalViewAngle();*/
-
-
-
-
-             /*
-               int index = 0;
-                int[] pixels = new int[bitmap.getWidth() * bitmap.getHeight()];
-
-                bitmap.getPixels(pixels,0,bitmap.getWidth(),0,0,bitmap.getWidth(),bitmap.getHeight());
-                for (int x = 0; x < bitmap.getWidth(); x++) {
-                    for (int y = 0; y < bitmap.getHeight(); y++) {
-
-                       /* A = (pixels[index] >> 24) & 0xFF;
-                        Rs = (pixels[index] >> 16) & 0xFF;
-                        G = (pixels[index] >> 8) & 0xFF;
-                        B = pixels[index] & 0xFF;
-                        ++index;
-
-                    }
-                }*/
-
-
-
+                double valorperimetro = 27/ valordiametro * contadorblancos;
+                double vdiametromedido= valorperimetro/3.1415;
+                double radio = vdiametromedido /2 ;
+                area = ((radio * radio) * 3.1415);
+                Toast.makeText(Drawing.this, "el area en MM es = " + area, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -205,7 +162,58 @@ public class Drawing extends AppCompatActivity {
         });
     }
 
+    public void medir(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Drawing.this);
+        builder.setTitle("Herida medida exitosamente");
+        builder.setMessage("¿esta satisfecha con la medicion?").setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                StorageReference storageRef = storage.getReference();
+
+
+                Uri file = Uri.fromFile(new File("/storage/self/primary/Android/data/com.example.firebaseauth/files/Pictures/fototemporal.jpg"));
+                StorageReference riversRef = storageRef.child("images/" + rutdelpaciente + nombreherida + currentDateandTime);
+                UploadTask uploadTask = riversRef.putFile(file);
+                Intent intent = new Intent(Drawing.this, EscalasanElian.class);
+                intent.putExtra("rutdelpaciente", rutdelpaciente);
+                intent.putExtra("nombreherida", nombreherida);
+                intent.putExtra("areacv",area);
+                startActivity(intent);
+                Toast.makeText(Drawing.this, "Paciente registrado correctamente", Toast.LENGTH_LONG).show();
+
+
+                uploadTask.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Intent intent = new Intent(Drawing.this, camaraCV.class);
+                        startActivity(intent);
+                        Toast.makeText(Drawing.this, "Error al guardar Datos", Toast.LENGTH_LONG).show();
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    }
+                });
+            }
+        }).setNegativeButton("volver a medir", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Drawing.this, camaraCV.class);
+                startActivity(intent);
+                Toast.makeText(Drawing.this, "Error al guardar Datos", Toast.LENGTH_LONG).show();
+            }
+        }).show();
+
+
+
+
+    }
+
+
+    /*
     public void get_area () {
         Camera camera = null;
         Camera.Parameters p = camera.getParameters();
@@ -218,7 +226,7 @@ public class Drawing extends AppCompatActivity {
         Toast.makeText(Drawing.this, "pixeles blancos = " + size, Toast.LENGTH_SHORT).show();
 
 
-    }
+    }*/
 
     private int take_picture_function_rgb(int take_image, Bitmap bitmap) {
         if (take_image ==1){
@@ -248,22 +256,20 @@ public class Drawing extends AppCompatActivity {
 
         return take_image;
     }
-  /*  @Override
-    public boolean onTouchEvent(MotionEvent motionEvent) {
-        scaleGestureDetector.onTouchEvent(motionEvent);
-        return true;
 
-    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
-        @Override
-        public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
-            mScaleFactor *= scaleGestureDetector.getScaleFactor();
-            mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 10.0f));
-            imagedrawing.setScaleX(mScaleFactor);
-            imagedrawing.setScaleY(mScaleFactor);
-            return true;
-        }
-    }*/
+    int ancho = bitmap2.getWidth();
+    int largo = bitmap2.getHeight();
     public ArrayList<DrawingClass> DrawingClassArrayList = new ArrayList<DrawingClass>();
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    String currentDateandTime = sdf.format(new Date());
+
+
+
+
+
+
+
+
 
     class SketchSheetView extends View {
 
@@ -271,7 +277,7 @@ public class Drawing extends AppCompatActivity {
 
             super(context);
             //Bitmap bitmap = BitmapFactory.decodeFile("/storage/self/primary/Android/data/com.example.firebaseauth/files/Pictures/fototemporal.jpg");
-            bitmap = Bitmap.createBitmap(bitmap2.getWidth(), bitmap2.getHeight(), Bitmap.Config.ARGB_4444);
+            bitmap = Bitmap.createBitmap(ancho,largo, Bitmap.Config.ARGB_4444);
 
             canvas = new Canvas(bitmap);
 
@@ -333,7 +339,7 @@ public class Drawing extends AppCompatActivity {
 
 
     }
-    public int largo = DrawingClassArrayList.size();
+
  /*
     public void medir(View view) {
         Valores Pperimetro = new Valores();

@@ -31,13 +31,16 @@ public class EscalasanElian extends AppCompatActivity {
     ViewPager2 Pager2;
     Fragmentadapter adapter;
     Toast activo;
+    double area;
     boolean cancelartoast = false;
     String Ruta1= "ruta1",Ruta2="ruta2",Ruta3="ruta3",Ruta4="ruta4",Ruta5="ruta5",Ruta6="ruta6";
 
     String rutdelpaciente, llave = "rutdelpaciente";
     String nombreherida, key = "nombreherida";
+    String Vpix, Vpixkey = "valor pixel";
+
    // Button btnfalanges, btnmetatarsiano, btntarsal;
-    int locinicial,locactual,numheridas,isquemia, infeccion, edema, neuropatia, area, profundidad, cicatrizacion;
+    int locinicial,locactual,numheridas,isquemia, infeccion, edema, neuropatia, area2, profundidad, cicatrizacion;
     String slocinicial,slocactual,snumheridas,sisquemia, sinfeccion, sedema, sneuropatia, sarea, sprofundidad, scicatrizacion;
     String TRuta1;
     String TRuta2;
@@ -92,8 +95,10 @@ public class EscalasanElian extends AppCompatActivity {
         });
 
         //textView2=findViewById(R.id.textView2);
+        String areaCV = "areacv";
         rutdelpaciente = bundle.getString(llave);
         nombreherida = bundle.getString(key);
+        area = bundle.getDouble(areaCV);
         //textView2.setText(rutdelpaciente);
 
     }
@@ -557,8 +562,8 @@ public class EscalasanElian extends AppCompatActivity {
         Button Hchica = findViewById(R.id.heridapequeña);
         Button Hmediana = findViewById(R.id.heridamediana);
         Button Hgrande = findViewById(R.id.heridagrande);
-
-        area = 1;
+        if(area < 100 ){
+        area2 = 1;}
         sarea = "menor a 10 cm2 (equivalente a 2 monedas de 500)";
         cancelartoast();
         showtoast(sarea);
@@ -572,8 +577,8 @@ public class EscalasanElian extends AppCompatActivity {
         Button Hchica = findViewById(R.id.heridapequeña);
         Button Hmediana = findViewById(R.id.heridamediana);
         Button Hgrande = findViewById(R.id.heridagrande);
-
-        area = 2;
+        if(area <100 && area >400){
+        area2 = 2;}
         sarea = "10 a 40 cm2";
         cancelartoast();
         showtoast(sarea);
@@ -586,8 +591,8 @@ public class EscalasanElian extends AppCompatActivity {
         Button Hchica = findViewById(R.id.heridapequeña);
         Button Hmediana = findViewById(R.id.heridamediana);
         Button Hgrande = findViewById(R.id.heridagrande);
-
-        area = 3;
+        if(area < 400){
+        area2 = 3;}
         sarea = "mayor a 40cm2)";
         cancelartoast();
         showtoast(sarea);
@@ -654,11 +659,13 @@ public class EscalasanElian extends AppCompatActivity {
     String r1,r2,r3,r4,r5,r6;
 
     public void guardardatos(View view) {
+
         //leer rutas anteriores
         ProgressBar progressBar = findViewById(R.id.progresbar);
         progressBar.setVisibility(View.VISIBLE);
         //guardar los datos de resultados
-        int puntaje = locinicial + locactual +numheridas+isquemia+infeccion+ edema+ neuropatia+ area+ profundidad+ cicatrizacion;
+        int puntaje = locinicial + locactual +numheridas+isquemia+infeccion+ edema+ neuropatia+ area2+ profundidad+ cicatrizacion;
+        String sarea = String.valueOf(area);
         resultadospuntaje result = new resultadospuntaje(slocinicial,slocactual,snumheridas,sisquemia,sinfeccion,sedema,sneuropatia,sarea,scicatrizacion,sprofundidad,puntaje);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(rutdelpaciente);
