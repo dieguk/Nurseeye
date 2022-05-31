@@ -1,4 +1,4 @@
-package com.example.firebaseauth;
+package com.example.NurseEye;
 
 import android.content.Context;
 

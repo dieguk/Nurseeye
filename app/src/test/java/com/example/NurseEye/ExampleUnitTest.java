@@ -1,4 +1,4 @@
-package com.example.firebaseauth;
+package com.example.NurseEye;
 
 import org.junit.Test;
 
