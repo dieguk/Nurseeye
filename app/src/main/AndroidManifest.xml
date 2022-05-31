@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.firebaseauth"
+    package="com.example.nurseeye"
     tools:ignore="ExtraText" >
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -27,25 +27,25 @@
     <application
 
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_lognurseeye_foreground"
+        android:label="@string/NurseEye"
+        android:roundIcon="@mipmap/ic_lognurseeye_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FirebaseAuth" >
+        android:theme="@style/Theme.NurseEye" >
         <activity
-            android:name=".Drawing"
+            android:name="com.example.nurseeye.Drawing"
             android:exported="false" />
         <activity
-            android:name=".LoadResultados"
+            android:name="com.example.nurseeye.LoadResultados"
             android:exported="false" />
         <activity
-            android:name=".Camerax"
+            android:name="com.example.nurseeye.Camerax"
             android:exported="false" />
         <activity
-            android:name=".camaraCV"
+            android:name="com.example.nurseeye.camaraCV"
             android:exported="true" />
         <activity
-            android:name=".LoadActivity"
+            android:name="com.example.nurseeye.LoadActivity"
             android:label="@string/title_activity_load"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <!--
@@ -55,7 +55,7 @@
             android:value="true" />    <uses-feature android:name="android.hardware.type.watch" />
         -->
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.nurseeye.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
             <intent-filter>
@@ -65,10 +65,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".firebase"
+            android:name="com.example.nurseeye.firebase"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".EscalasanElian"
+            android:name="com.example.nurseeye.EscalasanElian"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 

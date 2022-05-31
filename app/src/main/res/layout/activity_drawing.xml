@@ -27,13 +27,13 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="83dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:onClick="medir"
-        android:text="medir"
+        android:text="Continuar"
         app:layout_constraintBottom_toBottomOf="@+id/imagedrawing"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.286"
@@ -43,7 +43,7 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="borrar"
+        android:text="Medir"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button2" />
