@@ -8,31 +8,39 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        app:title="."
+        app:title=""
         android:layout_height="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Light"
-        android:background= "#303f9f"
+        android:background= "#0A7392"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextbuscador"
         android:layout_width="140dp"
         android:layout_height="40dp"
-        android:background="@color/white"
+        android:background="@drawable/txtcorner"
         android:hint="Ingresar RUT"
+        android:textAlignment="center"
+
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="Buscar"
         android:id="@+id/botonbuscar"
+        android:layout_width="93dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/corners"
         android:onClick="buscarpaciente"
+        android:text="Buscar"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.309"
         app:layout_constraintStart_toEndOf="@+id/editTextbuscador"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

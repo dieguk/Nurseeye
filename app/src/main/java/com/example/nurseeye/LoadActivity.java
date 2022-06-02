@@ -19,11 +19,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoadActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,6 +34,12 @@ public class LoadActivity extends AppCompatActivity implements NavigationView.On
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     EditText buscadorcorto;
+    String Ruta1= "ruta1",Ruta2="ruta2",Ruta3="ruta3",Ruta4="ruta4",Ruta5="ruta5",Ruta6="ruta6";
+    String TRuta1;
+    String TRuta2;
+    String TRuta3;
+    String TRuta4;
+    String TRuta5;
 
 
     Button btnbuscarcorto,botonherida;
@@ -123,46 +126,43 @@ public class LoadActivity extends AppCompatActivity implements NavigationView.On
         }
         FirebaseFirestore db = FirebaseFirestore.getInstance();
        DocumentReference load = db.collection("datosPacienteins").document(rut);
-        load.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    layoutframe.setVisibility(View.VISIBLE);
+        load.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                layoutframe.setVisibility(View.VISIBLE);
 
-                    String ruta = documentSnapshot.getString(disrut);
-                    txtinprut.setText(ruta);
-                    String name = documentSnapshot.getString(disnombre);
-                    txtinpnombre.setText(name);
-                    String diag = documentSnapshot.getString(disdiagnostico);
-                    txtinpdiagnostico.setText(diag);
-                    String tiempoev = documentSnapshot.getString(distiempo);
-                    txtinptiempoev.setText(tiempoev);
-                    String edad = documentSnapshot.getString(disedad);
-                    txtinpedad.setText(edad);
-                    String sexo = documentSnapshot.getString(dissexo);
-                    txtinpsexo.setText(sexo);
-                    String amorbidos = documentSnapshot.getString(disamorbidos);
-                    txtinpamorbidos.setText(amorbidos);
-                    String medicamentos = documentSnapshot.getString(dismedicamentos);
-                    txtinpmedicamentos.setText(medicamentos);
-                    String fecha = documentSnapshot.getString(disfecha);
-                    txtinpfecha.setText(fecha);
-                    String herida1= documentSnapshot.getString(disherida1);
-                    txtinpherida1.setText(herida1);
+                String ruta = documentSnapshot.getString(disrut);
+                txtinprut.setText(ruta);
+                String name = documentSnapshot.getString(disnombre);
+                txtinpnombre.setText(name);
+                String diag = documentSnapshot.getString(disdiagnostico);
+                txtinpdiagnostico.setText(diag);
+                String tiempoev = documentSnapshot.getString(distiempo);
+                txtinptiempoev.setText(tiempoev);
+                String edad = documentSnapshot.getString(disedad);
+                txtinpedad.setText(edad);
+                String sexo = documentSnapshot.getString(dissexo);
+                txtinpsexo.setText(sexo);
+                String amorbidos = documentSnapshot.getString(disamorbidos);
+                txtinpamorbidos.setText(amorbidos);
+                String medicamentos = documentSnapshot.getString(dismedicamentos);
+                txtinpmedicamentos.setText(medicamentos);
+                String fecha = documentSnapshot.getString(disfecha);
+                txtinpfecha.setText(fecha);
+                String herida1= documentSnapshot.getString(disherida1);
+                txtinpherida1.setText(herida1);
 
 
+                botonherida.setText(herida1);
+                if (herida1 == ""){
+                    txtinpherida1.setVisibility(View.INVISIBLE);
+                }else{
                     botonherida.setText(herida1);
-                    if (herida1 == ""){
-                        txtinpherida1.setVisibility(View.INVISIBLE);
-                    }else{
-                        botonherida.setText(herida1);
-                        botonherida.setVisibility(View.VISIBLE);
-                    }
-
-
-                } else {
-                    Toast.makeText(LoadActivity.this,"no se encuentra el paciente intentelo nuevamente",Toast.LENGTH_LONG).show();
+                    botonherida.setVisibility(View.VISIBLE);
                 }
+
+
+            } else {
+                Toast.makeText(LoadActivity.this,"no se encuentra el paciente intentelo nuevamente",Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -179,10 +179,44 @@ public class LoadActivity extends AppCompatActivity implements NavigationView.On
         TextView textinfo =findViewById(R.id.textView11);
         textinfo.setVisibility(View.VISIBLE);
     }
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    public void datosanteriores(View view) {
+        String rutdelpaciente = txtinprut.getText().toString(), nombreherida = botonherida.getText().toString() ;
+        DocumentReference load2 = db.collection("datosPacienteins").document(rutdelpaciente).collection("resultados").document("Rutastemporales");
+        load2.get().addOnSuccessListener(documentSnapshot -> {
+
+            if (documentSnapshot.exists()) {
+                TRuta1 = documentSnapshot.getString(Ruta1);
+
+                TRuta2 = documentSnapshot.getString(Ruta2);
+
+                TRuta3 = documentSnapshot.getString(Ruta3);
+
+                TRuta4 = documentSnapshot.getString(Ruta4);
+
+                TRuta5 = documentSnapshot.getString(Ruta5);
+
+            }
+            String Nruta1,Nruta2,Nruta3,Nruta4,Nruta5;
+            Nruta1 = TRuta1;
+            Nruta2 = TRuta2;
+            Nruta3 = TRuta3;
+            Nruta4 = TRuta4;
+            Nruta5 = TRuta5;
+
+            Intent intent = new Intent(LoadActivity.this,LoadResultados.class);
+            intent.putExtra("rutdelpaciente",rutdelpaciente);
+            intent.putExtra("nombreherida",nombreherida);
+
+            intent.putExtra("ruta1",Nruta1);
+            intent.putExtra("ruta2",Nruta2);
+            intent.putExtra("ruta3",Nruta3);
+            intent.putExtra("ruta4",Nruta4);
+            intent.putExtra("ruta5",Nruta5);
+            startActivity(intent);
+        });
 
 
-
-
-
-
+    }
 }

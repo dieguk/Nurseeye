@@ -764,7 +764,8 @@ public class EscalasanElian extends AppCompatActivity {
                     progressBar.setVisibility(View.INVISIBLE);
                     Intent intent = new Intent(EscalasanElian.this,LoadResultados.class);
                     intent.putExtra("rutdelpaciente",rutdelpaciente);
-                    intent.putExtra("nombreherida",nombreherida);intent.putExtra("ruta1",Nruta1);
+                    intent.putExtra("nombreherida",nombreherida);
+                    intent.putExtra("ruta1",Nruta1);
                     intent.putExtra("ruta2",Nruta2);
                     intent.putExtra("ruta3",Nruta3);
                     intent.putExtra("ruta4",Nruta4);

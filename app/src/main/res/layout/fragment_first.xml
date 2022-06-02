@@ -15,11 +15,11 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_marginTop="24dp"
             android:layout_height="wrap_content"
             android:padding="64dp"
-            app:cardBackgroundColor="#9400BCD4"
+            app:cardBackgroundColor="#00BCD4"
             app:cardCornerRadius="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                android:background="#9400BCD4">
+                android:background="#00BCD4">
 
                 <TextView
                     android:id="@+id/textView4"
@@ -130,11 +130,9 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/templatebotonverde"
+                    android:onClick="setdorsal"
                     android:text="Dorsal o plantar"
                     android:textColor="@color/white"
-                    android:onClick="setdorsal"
-                    app:layout_constraintRight_toLeftOf="@+id/btnmedial"
-                    app:layout_constraintLeft_toRightOf="@+id/btnmedial"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -143,13 +141,12 @@
                     android:layout_width="125dp"
                     android:layout_height="84dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="12dp"
                     android:background="@drawable/templatebotonamarillo"
                     android:onClick="setmedial"
                     android:text="Medial, Lateral o Tobillo"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toStartOf="@+id/btndosomas"
-                    app:layout_constraintLeft_toRightOf="@+id/btndorsal"
+                    app:layout_constraintStart_toEndOf="@+id/btndorsal"
                     app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
                 <Button
@@ -159,9 +156,9 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/templatebotonrojo"
+                    android:onClick="setdosomas"
                     android:text="Dos o mas"
                     android:textColor="@color/white"
-                    android:onClick="setdosomas"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView5" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -169,11 +166,10 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView3"
-            android:layout_width="413dp"
-
+            android:layout_width="match_parent"
             android:layout_height="141dp"
             android:layout_marginTop="20dp"
-            app:cardBackgroundColor="#E21775DA"
+            app:cardBackgroundColor="#01579B"
             app:cardCornerRadius="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -184,7 +180,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                android:background="#E21775DA">
+                android:background="#01579B">
 
                 <Button
                     android:id="@+id/btnuna"
@@ -220,6 +216,7 @@
                     android:layout_height="52dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
+                    android:textColor="@color/white"
                     android:background="@drawable/templatebotonrojo"
                     android:text="Tres o más"
                     android:onClick="settresomas"
@@ -249,7 +246,7 @@
                     android:focusable="true"
                     android:onClick="informaciondeescala"
                     android:text="3. Nuemro de zonas afectadas"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

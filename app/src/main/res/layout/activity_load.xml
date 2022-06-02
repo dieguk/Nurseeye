@@ -188,20 +188,33 @@
                         android:hint="herida 1"
                         app:layout_constraintTop_toBottomOf="@+id/textView"
                         tools:layout_editor_absoluteX="0dp" />
-
+                    <Button
+                        android:id="@+id/dah"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/corners"
+                        android:text="Datos Anteriores de herida"
+                        android:onClick="datosanteriores"/>
                     <Button
                         android:id="@+id/botonherida"
-                        android:layout_width="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_width="match_parent"
+                        android:backgroundTint="@color/colorPrimaryDark"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:background="@drawable/corners"
                         android:text="herida 1"
-
                         android:onClick="evaluar"
                          />
+
 
                 </LinearLayout>
             </ScrollView>
 
         </FrameLayout>
+
+
     </LinearLayout>
 
     <include

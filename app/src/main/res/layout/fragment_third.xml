@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            app:cardBackgroundColor="#9400BCD4"
+            app:cardBackgroundColor="#00BCD4"
             app:cardCornerRadius="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
-                android:background="#9400BCD4">
+                android:background="#00BCD4">
 
                 <TextView
                     android:id="@+id/textView7"
@@ -46,10 +46,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:textColor="@color/white"
                     android:background="@drawable/templatebotonverde"
-                    android:text="superficial"
                     android:onClick="psuperficial"
+                    android:text="superficial"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toStartOf="@+id/pparcial"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textView7" />
 
@@ -57,13 +59,14 @@
                     android:id="@+id/pparcial"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:textColor="@color/white"
                     android:background="@drawable/templatebotonamarillo"
-                    android:text="parcial"
                     android:onClick="pparcial"
-                    app:layout_constraintStart_toEndOf="@+id/profundidad"
+                    android:text="parcial"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="@+id/profunda"
+                    app:layout_constraintHorizontal_bias="0.523"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
                 <Button
@@ -71,13 +74,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/templatebotonrojo"
+                    android:onClick="profunda"
                     android:text="total"
                     android:textColor="@color/white"
-                    android:onClick="profunda"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/pparcial"
+                    app:layout_constraintHorizontal_bias="0.947"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -96,7 +99,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="127dp"
                 android:background="#03A9F4"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="8dp">
@@ -108,8 +111,8 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:onClick="cicatrizacion"
                     android:background="@drawable/templatebotonverde"
+                    android:onClick="cicatrizacion"
                     android:text="Epitalizacion"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toStartOf="@+id/granulacion"
@@ -122,27 +125,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:onClick="granulacion"
                     android:background="@drawable/templatebotonamarillo"
+                    android:onClick="granulacion"
                     android:text="Granulacion"
                     android:textColor="@color/white"
-                    app:layout_constraintEnd_toStartOf="@+id/inflamado"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
                 <Button
                     android:id="@+id/inflamado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/templatebotonrojo"
-                    android:text="Inflamatoria"
                     android:onClick="inflamado"
+                    android:text="Inflamatoria"
                     android:textColor="@color/white"
-                    app:layout_constraintStart_toEndOf="@+id/granulacion"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8"
-                    tools:layout_editor_absoluteY="151dp" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
                 <TextView
                     android:id="@+id/textView8"
@@ -261,12 +263,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Button"
-            android:onClick="guardardatos"
             android:background="@drawable/colorclick"
+            android:backgroundTint="#0A7392"
+            android:gravity="center"
+            android:onClick="guardardatos"
+            android:text="Terminar Evaluacion"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.905"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent" />
 
 
