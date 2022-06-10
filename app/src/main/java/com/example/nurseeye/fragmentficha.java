@@ -9,6 +9,7 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.nurseeye.R;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 

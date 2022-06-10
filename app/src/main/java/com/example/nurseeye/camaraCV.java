@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
 
+import com.example.nurseeye.R;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -160,7 +161,7 @@ public class camaraCV extends Activity implements CameraBridgeViewBase.CvCameraV
 
                 Imgproc.circle(input, center, 3, new Scalar(255, 255, 255), 5);
                 Imgproc.circle(input, center, radius, new Scalar(0, 255, 0), 2);
-                Imgproc.putText(input, "el area es "+ area2,center,4,0.5,new Scalar(0,0,0),2);
+                //Imgproc.putText(input, "el area es "+ area2,center,4,0.5,new Scalar(0,0,0),2);
 
 
 

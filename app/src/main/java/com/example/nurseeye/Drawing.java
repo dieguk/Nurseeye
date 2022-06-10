@@ -25,6 +25,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.example.nurseeye.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -154,8 +155,8 @@ public class Drawing extends AppCompatActivity {
                 double valorperimetro = 27/ valordiametro * contadorblancos;
                 double vdiametromedido= valorperimetro/3.1415;
                 double radio = vdiametromedido /2 ;
-                area = ((radio * radio) * 3.1415);
-                Toast.makeText(Drawing.this, "el area en MM es = " + area, Toast.LENGTH_SHORT).show();
+                area = ((radio * radio) * 3.1415)/100;
+                Toast.makeText(Drawing.this, "el area en cm es = " + area, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -201,12 +202,15 @@ public class Drawing extends AppCompatActivity {
                     }
                 });
             }
-        }).setNegativeButton("volver a medir", new DialogInterface.OnClickListener() {
+        }).setNegativeButton("Regresar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Drawing.this, camaraCV.class);
-                startActivity(intent);
+
+                intent.putExtra("rutdelpaciente", rutdelpaciente);
+                intent.putExtra("nombreherida", nombreherida);
                 Toast.makeText(Drawing.this, "Error al guardar Datos", Toast.LENGTH_LONG).show();
+                startActivity(intent);
             }
         }).show();
 
