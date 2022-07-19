@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="52dp"
                     android:hint="RUT"
-                    app:helperText="ingresar rut"
+                    app:helperText="Ingresar RUT"
                     app:layout_constraintTop_toBottomOf="@+id/textView"
                     tools:layout_editor_absoluteX="0dp" />
 
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="52dp"
                     android:hint="Nombre"
-                    app:helperText="ingresar nombre"
+                    app:helperText="Ingresar Nombre"
                     app:layout_constraintTop_toBottomOf="@+id/textView"
                     tools:layout_editor_absoluteX="0dp" />
                 <EditText
@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="52dp"
                     android:hint="Diagnostico"
-                    app:helperText="ingresar diagnostico"
+                    app:helperText="Ingresar Diagnostico"
                     app:layout_constraintTop_toBottomOf="@+id/textView"
                     tools:layout_editor_absoluteX="0dp" />
                 <EditText
@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="52dp"
                     android:hint="Edad"
-                    app:helperText="ingresar edad"
+                    app:helperText="Ingresar Edad"
                     app:layout_constraintTop_toBottomOf="@+id/textView"
                     tools:layout_editor_absoluteX="0dp" />
                 <EditText
@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="52dp"
                     android:hint="Tiempoevolucion"
-                    app:helperText="ingresar tiempoevolucion"
+                    app:helperText="Ingresar Tiempoevolucion"
                     app:layout_constraintTop_toBottomOf="@+id/textView"
                     tools:layout_editor_absoluteX="0dp" />
                 <EditText
@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="52dp"
                     android:hint="Sexo"
-                    app:helperText="ingresar sexo"
+                    app:helperText="Ingresar Sexo"
                     app:layout_constraintTop_toBottomOf="@+id/textView"
                     tools:layout_editor_absoluteX="0dp" />
                 <EditText
@@ -90,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="52dp"
                     android:hint="Medicamentos"
-                    app:helperText="ingresar medicamentos"
+                    app:helperText="Ingresar Medicamentos"
                     app:layout_constraintTop_toBottomOf="@+id/textView"
                     tools:layout_editor_absoluteX="0dp" />
                 <EditText
@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="52dp"
                     android:hint="Antecedentes morbidos"
-                    app:helperText="ingresar amorbidos"
+                    app:helperText="Ingresar Antecedentes morbidos"
                     app:layout_constraintTop_toBottomOf="@+id/textView"
                     tools:layout_editor_absoluteX="0dp" />
                 <EditText
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="52dp"
                     android:hint="pull fecha"
-                    app:helperText="ingresar fecha"
+                    app:helperText="Ingresar Fecha"
                     app:layout_constraintTop_toBottomOf="@+id/textView"
                     tools:layout_editor_absoluteX="0dp" />
 

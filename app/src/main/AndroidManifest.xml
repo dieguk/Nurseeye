@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.nurseeye"
+    package="com.godo.nurseeye"
     tools:ignore="ExtraText" >
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -33,19 +33,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NurseEye" >
         <activity
-            android:name="com.example.nurseeye.Drawing"
+            android:name="com.godo.nurseeye.Drawing"
             android:exported="false" />
         <activity
-            android:name="com.example.nurseeye.LoadResultados"
+            android:name="com.godo.nurseeye.LoadResultados"
             android:exported="false" />
         <activity
-            android:name="com.example.nurseeye.Camerax"
+            android:name="com.godo.nurseeye.Camerax"
             android:exported="false" />
         <activity
-            android:name="com.example.nurseeye.camaraCV"
+            android:name="com.godo.nurseeye.camaraCV"
             android:exported="true" />
         <activity
-            android:name="com.example.nurseeye.LoadActivity"
+            android:name="com.godo.nurseeye.LoadActivity"
             android:label="@string/title_activity_load"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <!--
@@ -55,7 +55,7 @@
             android:value="true" />    <uses-feature android:name="android.hardware.type.watch" />
         -->
         <activity
-            android:name="com.example.nurseeye.MainActivity"
+            android:name="com.godo.nurseeye.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
             <intent-filter>
@@ -65,10 +65,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.nurseeye.firebase"
+            android:name="com.godo.nurseeye.firebase"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.example.nurseeye.EscalasanElian"
+            android:name="com.godo.nurseeye.EscalasanElian"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context="com.example.nurseeye.firstFragment">
+    tools:context="com.example.nurseeye.com.gutar.nurseeye.firstFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -118,7 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="2. Loalizacion Actual de la Herida"
+                    android:text="2. Localizacion Actual de la Herida"
                     android:textColor="@color/white"
                     tools:layout_editor_absoluteX="94dp"
                     tools:layout_editor_absoluteY="16dp" />
@@ -245,7 +245,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:onClick="informaciondeescala"
-                    android:text="3. Nuemro de zonas afectadas"
+                    android:text="3. Numero de zonas afectadas"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

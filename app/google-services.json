@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "226097499630",
+    "firebase_url": "https://silken-buttress-281817-default-rtdb.firebaseio.com",
     "project_id": "silken-buttress-281817",
     "storage_bucket": "silken-buttress-281817.appspot.com"
   },
@@ -9,16 +10,24 @@
       "client_info": {
         "mobilesdk_app_id": "1:226097499630:android:0fa88b61cdd6033ab512ff",
         "android_client_info": {
-          "package_name": "com.example.firebaseauth"
+          "package_name": "com.godo.nurseeye"
         }
       },
       "oauth_client": [
         {
-          "client_id": "226097499630-4m8nanqv7qlmi19f7q68j4vuaqpbnci9.apps.googleusercontent.com",
+          "client_id": "226097499630-5amivrisfgcoei1a9tj42ii1f5e0qinn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.firebaseauth",
-            "certificate_hash": "2eb51c41d7ae6337fc81c73724d350dcc3b19278"
+            "package_name": "com.godo.nurseeye",
+            "certificate_hash": "f49e89dd7af5639fcf7516d98e408e3e9ebaae13"
+          }
+        },
+        {
+          "client_id": "226097499630-jodobf8b7nbpto0hol8me5ko2s3qho2r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.godo.nurseeye",
+            "certificate_hash": "1dbefdf29da09a925f291d5f2c2dd293d872aeac"
           }
         },
         {
